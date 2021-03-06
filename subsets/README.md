@@ -1,3 +1,4 @@
+[Discussion Post (created on 6/2/2021 at 12:47)](https://leetcode.com/problems/subsets/discuss/1095689/CPP-using-Aditya-Verma-subset-video-(12)-recursion-playlist)  
 <h2>78. Subsets</h2><h3>Medium</h3><hr><div><p>Given an integer array <code>nums</code> of <strong>unique</strong> elements, return <em>all possible subsets (the power set)</em>.</p>
 
 <p>The solution set <strong>must not</strong> contain duplicate subsets. Return the solution in <strong>any order</strong>.</p>
