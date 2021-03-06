@@ -1,21 +1,23 @@
 class Solution {
 public:
-    vector<vector<int>>v;
-    void subset(vector<int>&nums,int i,vector<int>temp)
+    vector<vector<int> >m;
+    void solve(vector<int>nums,vector<int>op)
     {
-        if(nums.size()==i)
+        if(nums.size()==0)
         {
-            v.push_back(temp);
-            return ;
+            m.push_back(op);
+            return;
         }
-        subset(nums,i+1,temp);
-        temp.push_back(nums[i]);
-        subset(nums,i+1,temp);
+        vector<int>op1=op,op2=op;
+        op1.push_back(nums[0]);
+        nums.erase(nums.begin()+0);
+        solve(nums,op1);
+        solve(nums,op2);
     }
     vector<vector<int>> subsets(vector<int>& nums) {
-    
-        vector<int>temp;
-        subset(nums,0,temp);
-        return v;
+        vector<int>op;
+        solve(nums,op);
+        return m;
+        
     }
 };
