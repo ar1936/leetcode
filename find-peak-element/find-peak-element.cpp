@@ -21,19 +21,38 @@
 // };
 
 
+// class Solution {
+// public:
+//     int findPeakElement(const vector<int> &num) {
+//         int low = 0, high = num.size() - 1;
+//         while (low < high - 1) {
+//             int mid = (low + high) / 2;
+//             if (num[mid] > num[mid - 1] && num[mid] > num[mid + 1]) 
+//                 return mid;
+//             else if (num[mid] > num[mid + 1]) 
+//                     high = mid - 1;
+//                  else 
+//                     low = mid + 1;    
+//         }
+//         return num[low] > num[high] ? low : high;
+//     }
+// };
+
+
+
+
 class Solution {
 public:
-    int findPeakElement(const vector<int> &num) {
-        int low = 0, high = num.size() - 1;
-        while (low < high - 1) {
-            int mid = (low + high) / 2;
-            if (num[mid] > num[mid - 1] && num[mid] > num[mid + 1]) 
-                return mid;
-            else if (num[mid] > num[mid + 1]) 
-                    high = mid - 1;
-                 else 
-                    low = mid + 1;    
+    int findPeakElement(vector<int>& nums) {
+        int n = nums.size(), l = 0, r = n - 1;
+        while (l < r) {
+            int m = (l + r) / 2, mr = m + 1;
+            if (nums[m] < nums[mr]) {
+                l = mr;
+            } else {
+                r = m;
+            }
         }
-        return num[low] > num[high] ? low : high;
+        return l;
     }
 };
