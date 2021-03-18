@@ -45,31 +45,31 @@
 
 
 
-
-
 class Solution {
 public:
-  int numSquares(int n) {
-    
-    vector<int>dp(n+1, INT_MAX-1);
-     vector<int>coins;
-    for(int i=1; i<=sqrt(n); i++)
-    {
-        coins.push_back(i*i);
-    }
-     dp[0]=0;
-    for(int i=1; i<=n;i++)
-    {
-        for(int j=0; j<coins.size(); j++)
+    int numSquares(int n) {
+        
+        if(n==0)return 0;
+        int sqrt_n = sqrt(n);
+        int perfectSquares[sqrt_n];
+        for(int i=1;i<=sqrt_n;i++)
         {
-            if(i>=coins[j])
+            perfectSquares[i-1] = i*i;
+        }
+        
+        int t[n+1];
+        t[0] = 0;
+        for(int i=1;i<=n;i++)
+        {
+            t[i] = INT_MAX;
+            for(int s : perfectSquares)
             {
-                dp[i]=min(dp[i], dp[i-coins[j]]+1);
+                if(i-s<0)break;
+                
+                t[i] = min(t[i],t[i-s]+1);
             }
         }
+        
+        return t[n];
     }
-    return dp[n];
-    
-                            
-}
 };
