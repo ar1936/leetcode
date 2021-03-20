@@ -1,17 +1,24 @@
 class Solution {
-private:
-    unordered_map<int, unordered_map<int, unordered_map<int, double>>>dp;
 public:
-    double knightProbability(int N, int K, int r, int c) {
-        if(dp.count(r) && dp[r].count(c) && dp[r][c].count(K)) return dp[r][c][K];
-        if(r < 0 || r >= N || c < 0 || c >= N) return 0;
+    double solve(int N, int K, int r, int c, vector<vector<vector<double>>> & dp){
+        if(r < 0 || c < 0 || r >= N || c >= N) return 0;
         if(K == 0) return 1;
-        double total = knightProbability(N, K - 1, r - 1, c - 2) + knightProbability(N, K - 1, r - 2, c - 1) 
-                     + knightProbability(N, K - 1, r - 1, c + 2) + knightProbability(N, K - 1, r - 2, c + 1) 
-                     + knightProbability(N, K - 1, r + 1, c + 2) + knightProbability(N, K - 1, r + 2, c + 1) 
-                     + knightProbability(N, K - 1, r + 1, c - 2) + knightProbability(N, K - 1, r + 2, c - 1);
-        double res = total / 8;
-        dp[r][c][K] = res;
-        return res;
+        if(dp[r][c][K] != -1) return dp[r][c][K];
+        double sum = solve(N, K - 1, r - 2, c - 1, dp) +
+                     solve(N, K - 1, r - 1, c - 2, dp) +
+                     solve(N, K - 1, r + 1, c - 2, dp) +
+                     solve(N, K - 1, r + 2, c - 1, dp) +
+                     solve(N, K - 1, r - 2, c + 1, dp) +
+                     solve(N, K - 1, r - 1, c + 2, dp) +
+                     solve(N, K - 1, r + 1, c + 2, dp) +
+                     solve(N, K - 1, r + 2, c + 1, dp);
+        sum = sum / 8;
+        dp[r][c][K] = sum;
+        return dp[r][c][K];
+    
+    }
+    double knightProbability(int N, int K, int r, int c) {
+        vector<vector<vector<double>>> dp(N + 1, vector<vector<double>> (N + 1, vector<double>(K + 1, -1)));
+        return solve(N, K, r, c, dp);
     }
 };
