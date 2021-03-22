@@ -16,8 +16,7 @@ public:
             }
             maxlen = max(maxlen, len[i]);
         }
-        // find the longest increasing subsequence of the whole sequence
-       // sum valid counts
+        
         for (int i = 0; i < n; i++) 
             if (len[i] == maxlen) ans += count[i];
         return ans;
