@@ -1,3 +1,4 @@
+[Discussion Post (created on 1/3/2021 at 20:46)](https://leetcode.com/problems/merge-sorted-array/submissions/)  
 <h2>88. Merge Sorted Array</h2><h3>Easy</h3><hr><div><p>Given two sorted integer arrays <code>nums1</code> and <code>nums2</code>, merge <code>nums2</code> into <code>nums1</code> as one sorted array.</p>
 
 <p>The number of elements initialized in <code>nums1</code> and <code>nums2</code> are <code>m</code> and <code>n</code> respectively. You may assume that <code>nums1</code> has a size equal to <code>m + n</code> such that it has enough space to hold additional elements from <code>nums2</code>.</p>
