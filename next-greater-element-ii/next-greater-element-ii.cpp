@@ -28,9 +28,10 @@ public:
         
         }
         reverse(v.begin(),v.end());
-        for(int i=0;i<n;i++){
-            v.pop_back();
-        }
+        // for(int i=0;i<n;i++){
+        //     v.pop_back();
+        // }
+        v.resize(n);
         return v;
     }
 };
