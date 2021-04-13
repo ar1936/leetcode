@@ -2,7 +2,6 @@ class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         stack <int>s;
-        vector<int> v;
         unordered_map<int,int>mp;
         for(int i=nums2.size()-1;i>=0;i--){
             if(s.empty())
@@ -23,8 +22,8 @@ public:
         }
 
         for(int i=0;i<nums1.size();i++){
-            v.push_back(mp[nums1[i]]);
+            nums1[i]=mp[nums1[i]];
         }
-        return v;
+        return nums1;
     }
 };
