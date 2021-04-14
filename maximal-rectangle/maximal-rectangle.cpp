@@ -47,18 +47,20 @@ public:
     int maximalRectangle(vector<vector<char>>& matrix) {
         if(matrix.size()==0)
             return 0;
-        for(int i=0;i<matrix.size();i++){
-            for(int j=0;j<matrix[i].size();j++)
-                matrix[i][j]=matrix[i][j]-'0';
-            }
+        // for(int i=0;i<matrix.size();i++){
+        //     for(int j=0;j<matrix[i].size();j++)
+        //         matrix[i][j]=matrix[i][j]-'0';
+        //     }
          
              vector<int>v;
         for(int j=0;j<matrix[0].size();j++){
+            matrix[0][j]=matrix[0][j]-'0';
             v.push_back(matrix[0][j]);
         }
         int m=largestRectangleArea(v);
         for(int i=1;i<matrix.size();i++){
             for(int j=0;j<matrix[i].size();j++){
+                matrix[i][j]=matrix[i][j]-'0';
                 if(matrix[i][j]==0)
                     v[j]=0;
                 else
