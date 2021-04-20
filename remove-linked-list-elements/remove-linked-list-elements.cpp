@@ -1,26 +1,49 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+
+// class Solution {
+// public:
+//     ListNode* removeElements(ListNode* head, int val) {
+//         if (head == 0) return head;
+        
+//         ListNode* temp = head;
+//         while (temp != 0 and temp->next != 0) {
+//             if (temp->next->val == val) 
+//                 temp->next = temp->next->next;
+//             else 
+//                 temp = temp->next;
+//         }
+//         if (head->val == val) 
+//             head = head->next;   
+//         return head;
+//     }
+// };
+
+
+
 class Solution {
-  public:
-  ListNode* removeElements(ListNode* head, int val) {
-    ListNode* sentinel = new ListNode(0);
-    sentinel->next = head;
-
-    ListNode *prev = sentinel, *curr = head, *toDelete = nullptr;
-    while (curr != nullptr) {
-      if (curr->val == val) {
-        prev->next = curr->next;
-        toDelete = curr;
-      } else prev = curr;
-
-      curr = curr->next;
-
-      if (toDelete != nullptr) {
-        delete toDelete;
-        toDelete = nullptr;
-      }
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        if(head==NULL)
+            return head;
+        ListNode *temp=head;
+        while(temp!=NULL&&temp->next!=NULL){
+            if(temp->next->val==val)
+                temp->next=temp->next->next;
+            else 
+                temp=temp->next;
+        }
+        if(head->val==val)
+            head=head->next;
+        return head;
     }
-
-    ListNode *ret = sentinel->next;
-    delete sentinel;
-    return ret;
-  }
 };
