@@ -4,12 +4,27 @@ public:
         
         unordered_set<ListNode *> s;
             
-          for(ListNode *curr=head ; curr!=NULL; curr=curr->next)
+          while(head!=NULL)
           {
-                  if(s.find(curr)!=s.end())
-                          return true;
-                  s.insert(curr);
+                  if(s.find(head)==s.end())
+                      s.insert(head);  
+                    else  
+                      return true;
+
+              head=head->next;
           }
           return false;  
+        
+    //     if(head==NULL)
+    //         return false;
+    //     ListNode *slow=head,*fast=head->next;
+    //     while(slow!=fast)
+    //     {
+    //         if(fast==NULL||fast->next==NULL)
+    //             return false;
+    //         fast=fast->next->next;
+    //         slow=slow->next;
+    //     }
+    //     return true;
     }
 };
