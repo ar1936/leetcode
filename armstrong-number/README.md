@@ -1,3 +1,4 @@
+[Discussion Post (created on 21/3/2021 at 18:14)](https://leetcode.com/problems/armstrong-number/discuss/1169702/C%2B%2B-100)  
 <h2>1134. Armstrong Number</h2><h3>Easy</h3><hr><div><p>Given an integer <code>n</code>, return <code>true</code> <em>if and only if it is an <strong>Armstrong number</strong></em>.</p>
 
 <p>The <code>k</code>-digit number <code>n</code> is an Armstrong number if and only if the <code>k<sup>th</sup></code> power of each digit sums to <code>n</code>.</p>
