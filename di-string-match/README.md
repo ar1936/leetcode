@@ -1,3 +1,4 @@
+[Discussion Post (created on 22/3/2021 at 15:20)](https://leetcode.com/problems/di-string-match/discuss/1171097/Cpp-simple-solution)  
 <h2>942. DI String Match</h2><h3>Easy</h3><hr><div><p>A permutation <code>perm</code> of <code>n + 1</code> integers of all the integers in the range <code>[0, n]</code> can be represented as a string <code>s</code> of length <code>n</code> where:</p>
 
 <ul>
