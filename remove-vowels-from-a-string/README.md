@@ -1,3 +1,4 @@
+[Discussion Post (created on 5/4/2021 at 8:59)](https://leetcode.com/problems/remove-vowels-from-a-string/discuss/1191996/100-faster-C%2B%2B-code)  
 <h2>1119. Remove Vowels from a String</h2><h3>Easy</h3><hr><div><p>Given a string <code>s</code>, remove the vowels <code>'a'</code>, <code>'e'</code>, <code>'i'</code>, <code>'o'</code>, and <code>'u'</code> from it, and return the new string.</p>
 
 <p>&nbsp;</p>
