@@ -1,3 +1,4 @@
+[Discussion Post (created on 6/4/2021 at 17:50)](https://leetcode.com/problems/last-stone-weight/discuss/1194403/C%2B%2B-using-sorting)  
 <h2>1046. Last Stone Weight</h2><h3>Easy</h3><hr><div><p>We have a collection of stones, each stone&nbsp;has a positive integer weight.</p>
 
 <p>Each turn, we choose the two <strong>heaviest</strong>&nbsp;stones&nbsp;and smash them together.&nbsp; Suppose the stones have weights <code>x</code> and <code>y</code> with <code>x &lt;= y</code>.&nbsp; The result of this smash is:</p>
