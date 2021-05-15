@@ -1,3 +1,4 @@
+[Discussion Post (created on 15/4/2021 at 21:36)](https://leetcode.com/problems/sorting-the-sentence/discuss/1210122/100-Faster-C%2B%2B-solution-Using-Map)  
 <h2>1859. Sorting the Sentence</h2><h3>Easy</h3><hr><div><p>A <strong>sentence</strong> is a list of words that are separated by a single space with no leading or trailing spaces. Each word consists of lowercase and uppercase English letters.</p>
 
 <p>A sentence can be <strong>shuffled</strong> by appending the <strong>1-indexed word position</strong> to each word then rearranging the words in the sentence.</p>
