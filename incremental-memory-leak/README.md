@@ -1,3 +1,4 @@
+[Discussion Post (created on 15/4/2021 at 21:43)](https://leetcode.com/problems/incremental-memory-leak/discuss/1210169/C%2B%2B-Easy-to-understand-using-while-loop)  
 <h2>1860. Incremental Memory Leak</h2><h3>Medium</h3><hr><div><p>You are given two integers <code>memory1</code> and <code>memory2</code> representing the available memory in bits on two memory sticks. There is currently a faulty program running that consumes an increasing amount of memory every second.</p>
 
 <p>At the <code>i<sup>th</sup></code> second (starting from 1), <code>i</code> bits of memory are allocated to the stick with <strong>more available memory</strong> (or from the first memory stick if both have the same available memory). If neither stick has at least <code>i</code> bits of available memory, the program <strong>crashes</strong>.</p>
