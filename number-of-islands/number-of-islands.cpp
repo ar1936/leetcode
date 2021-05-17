@@ -40,67 +40,35 @@
 //     }
 // };
 
-// void mark_visited(vector<vector<char>>mat,int x,int y, int N,int M){
-//     if(x<0||x==N||y<0||y==M||mat[x][y]=='0')
-//         return ;
+void mark_visited(vector<vector<char>>&mat,int x,int y, int N,int M){
+    if(x<0||x==N||y<0||y==M||mat[x][y]=='0')
+        return ;
     
-//     mat[x][y]='0';
-//     mark_visited(mat,x+1,y,N,M);
-//     mark_visited(mat,x,y+1,N,M);
-//     mark_visited(mat,x-1,y,N,M);
-//     mark_visited(mat,x,y-1,N,M);
+    mat[x][y]='0';
+    mark_visited(mat,x+1,y,N,M);
+    mark_visited(mat,x,y+1,N,M);
+    mark_visited(mat,x-1,y,N,M);
+    mark_visited(mat,x,y-1,N,M);
 
    
 
-// }
-// class Solution {
-// public:
-//     int numIslands(vector<vector<char>>& mat) {
-//         int N=mat.size();
-//         int M=mat[0].size();
-//         if(N==0)
-//             return 0;
-//         int ans=0;
-//         for(int i=0;i<N;i++){
-//             for(int j=0;j<M;j++){
-//                 if(mat[i][j]=='1'){
-//                     ans++;
-//                     mark_visited(mat,i,j,N,M);
-//                 }
-//             }
-//         }
-//         return ans;
-//     }
-// };
-
+}
 class Solution {
 public:
-    int numIslands(vector<vector<char>>& grid) {
-        int m = grid.size();
-        int  n =grid[0].size();
-        if(m==0)
+    int numIslands(vector<vector<char>>& mat) {
+        int N=mat.size();
+        int M=mat[0].size();
+        if(N==0)
             return 0;
-        int islands = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j] == '1') {
-                    islands++;
-                    eraseIslands(grid, i, j);
+        int ans=0;
+        for(int i=0;i<N;i++){
+            for(int j=0;j<M;j++){
+                if(mat[i][j]=='1'){
+                    ans++;
+                    mark_visited(mat,i,j,N,M);
                 }
             }
         }
-        return islands;
-    }
-private:
-    void eraseIslands(vector<vector<char>>& grid, int i, int j) {
-        int m = grid.size(), n = grid[0].size();
-        if (i < 0 || i == m || j < 0 || j == n || grid[i][j] == '0') {
-            return;
-        }
-        grid[i][j] = '0';
-        eraseIslands(grid, i - 1, j);
-        eraseIslands(grid, i + 1, j);
-        eraseIslands(grid, i, j - 1);
-        eraseIslands(grid, i, j + 1);
+        return ans;
     }
 };
