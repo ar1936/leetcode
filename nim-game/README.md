@@ -1,3 +1,4 @@
+[Discussion Post (created on 19/4/2021 at 0:36)](https://leetcode.com/problems/nim-game/discuss/1216565/C%2B%2B-solution-with-explaination)  
 <h2>292. Nim Game</h2><h3>Easy</h3><hr><div><p>You are playing the following Nim Game with your friend:</p>
 
 <ul>
