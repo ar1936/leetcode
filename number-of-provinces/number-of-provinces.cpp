@@ -1,42 +1,39 @@
+int parents[205];
 class Solution {
-public:
-    int parent[201];
+    void make_set(int n){
+        for(int i=0;i<n;i++){
+            parents[i]=i;
+        }
+    }
+    int find_set(int x){
+        if(x==parents[x])
+            return x;
+        return parents[x]=find_set(parents[x]);
+    }
+    void find_union(int u,int v){
+        int a=find_set(u);
+        int b=find_set(v);
+        if(a!=b)
+        {
+            parents[a]=b;
+        }
+        
+    }
     
-    int findCircleNum(vector<vector<int>>& M) {
-        int i, j, groups = 0, n = M.size();
+public:
+    int findCircleNum(vector<vector<int>>& grids) {
+        int n=grids.size(),ans=0,i,j;
         make_set(n);
-          
-        for(i = 0; i < n; i++) {
-            for(j = i + 1; j < n; j++) {
-                if(M[i][j])
-                    union_sets(i, j);
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(grids[i][j]==1)
+                    find_union(i,j);
             }
         }
-        
-        for(i = 0; i < n; i++) {
-            if(i == parent[i])
-                groups++;
+        for(int i=0;i<n;i++){
+            if(parents[i]==i)
+                ans++;
         }
-        
-        return groups;
-    }
-
-private:
-    void make_set(int n) {
-        for(int i = 0; i < n; i++) 
-            parent[i] = i;
-    }
-    
-    int find_set(int v) {
-        if (v == parent[v])
-            return v;
-        return parent[v] = find_set(parent[v]);
-    }
-    
-    void union_sets(int a, int b) {
-        a = find_set(a);
-        b = find_set(b);
-        if (a != b)
-            parent[b] = a;
+        return ans;
     }
 };
