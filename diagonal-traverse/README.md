@@ -1,3 +1,4 @@
+[Discussion Post (created on 8/5/2021 at 13:58)](https://leetcode.com/problems/diagonal-traverse/discuss/1258703/C%2B%2B-using-reverse)  
 <h2>498. Diagonal Traverse</h2><h3>Medium</h3><hr><div><p>Given an <code>m x n</code> matrix <code>mat</code>, return <em>an array of all the elements of the array in a diagonal order</em>.</p>
 
 <p>&nbsp;</p>
