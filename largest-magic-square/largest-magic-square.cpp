@@ -1,61 +1,59 @@
-#define ll long long
 class Solution {
-public:
-
-	// checking each square starting at vertex (x,y) with size s
-    int check(vector<vector<int>>& grid,int x,int y,int s){
-	
-		// checking boundary conditions for size of square , 
-		// else returning 1 , which is the minimum size possible
-        if(x+s>grid.size() || y+s>grid[0].size()) return 1;
-		
-        ll sum = 0;
-		// taking sum of first diagonal in sum variable 
-        for(int k=0; k<s ;k++){
-            sum+=grid[k+x][y+k];
-        }
-        ll sum2=0;
-		// taking sum of first diagonal in sum2 variable 
-        for(int k=0; k<s ;k++){
-            sum2+=grid[x+s-1-k][y+k];
-        }
-		
-		// if both sums are different , return 1 
-        if(sum2!=sum) return 1;
+    int solve(vector<vector<int>>&grid,int x,int y, int size){
+        int n=grid.size(),m=grid[0].size();
         
-		// checking sum for all rows and columns
-        for(int i=0 ;i<s ;i++){
-            ll sumrow=0;
-            for(int j=0 ;j<s ;j++) sumrow+=grid[i+x][y+j];
-            ll sumcol=0;
-            for(int j=0 ;j<s ;j++) sumcol+=grid[j+x][y+i];
-  
-			// if sum of row or column is not equal to precomputed diagonal sum, return 1
-            if(sumcol!=sum || sumrow!=sum) return 1;
-        }
-		
-		//finally return the size itself as it is a magic square and all rows , columns and diagonals' sum are equal
-        return s;
-    }
     
-    int largestMagicSquare(vector<vector<int>>& grid) {
+        if((x+size)>n||(y+size)>m)
+        {
+            return 1;
+        }
         
-		int n = grid.size() , m  = grid[0].size() ;
-        int ans=1;
-		
-        for(int i=0 ;i<n ;i++){
-		// row index i
-            for(int j=0 ;j<m ;j++){
-			//column index j
-                for(int k=1 ;k<=min(m,n) ;k++){
-				//size k
-                    int temp = check(grid,i,j,k);
-					//updating answer if we get greater size magic square 
-                    ans=max(ans,temp);
+        // very important part of this question sum1 contains sum of diagonal 1 and sum2 contains sum of diagonal 2 
+        long long sum1=0,sum2=0;
+        for(int k=0;k<size;k++){
+            sum1+=grid[x+k][y+k];
+            sum2+=grid[size+x-k-1][y+k];
+        }
+        
+        // if sum of both diagonal is not equal then we simply return square size 1 
+        if(sum1!=sum2)
+            return 1;
+        
+        
+        // check for row and col sum 
+        for(int i=0;i<size;i++){
+            long long row_sum=0,col_sum=0;
+            for(int j=0;j<size;j++){
+                row_sum+=grid[x+i][y+j];
+                col_sum+=grid[x+j][y+i];
+            }
+            
+            
+            if(row_sum!=sum1||col_sum!=sum1)
+                return 1;
+        }
+        
+        
+        return size;
+        
+    }
+   
+
+public:
+    int largestMagicSquare(vector<vector<int>>& grid) {
+        int ans=1,n=grid.size(),m=grid[0].size();
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                
+                // k represent size of each square at each index;
+                
+                
+                for(int k=0;k<=min(n,m);k++){
+                    ans=max(ans,solve(grid,i,j,k)); // -> i, j represent a index of grid and k represent size of square; 
                 }
             }
         }
-		//returning maximum size of magic square
         return ans;
     }
 };
+
