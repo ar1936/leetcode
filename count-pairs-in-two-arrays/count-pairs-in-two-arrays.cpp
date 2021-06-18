@@ -10,19 +10,18 @@ public:
         
         long long ans = 0;
         
-        int l = 0, r = nums1.size() - 1;
-        
-        while (l < r) {
-            const int ll = abs(diff[l]);
-            const int rr = abs(diff[r]);
-            if (rr > ll || diff[l] > 0) {
-                ans += r - l;
-                r--;
-            } 
-            else {
-                l++;
-            }
+        int l = 0;
+        int r = diff.size()-1;
+        while(l<r){
+             if (diff[l]+diff[r] > 0){
+                   ans += (r-l);
+                   r--;
+             }else{
+                  l++;
+             }
         }
+        
+        
         return ans;
     }
 };
