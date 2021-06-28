@@ -1,24 +1,36 @@
 class Solution {
-public:
-    int shipWithinDays(vector<int>& weights, int D) {
-        if(weights.empty() || D == 0) return 0;
-        int left = 0, right = 0;
-        for(auto w: weights) left = max(left, w), right += w;
-        if(D == weights.size()) return left;
-        while(left < right) {
-            int mid = (left + right) / 2;
-            int curr_days = 1, curr_bagsize = 0;
-            for(auto w : weights) {
-                if(curr_bagsize + w > mid) { //exceeds our current bag limit i.e mid
-                    //add further weights to the next bag
-                    //and test if it fits within the given D days
-                    curr_days++; curr_bagsize = 0;
-                }
-                curr_bagsize += w;
-            }
-            if(curr_days > D) left = mid + 1; //we need bigger bag sizes to accomodate
-            else right = mid; //lets test smaller bag sizes as it looks we've maybe got some extra space OR right is the answer itself
+bool solve(vector<int>weights,int mid,int days){
+    int count=0,sum=0;
+    for(int i=0;i<weights.size();i++){
+        if(sum+weights[i]>mid){
+            count++;
+            sum=weights[i];
         }
-        return left;
+        else
+            sum+=weights[i];
+    }
+     return count+1<=days;
+}
+    public:
+    int shipWithinDays(vector<int>& weights, int days) {
+        int lo=0,hi=0;
+        int sum=0;
+        for(int i=0;i<weights.size();i++){
+            sum+=weights[i];
+            lo=max(lo,weights[i]);
+        }
+        if(sum<=days){
+            return 1;
+        }
+        hi=sum;
+        while(lo<hi){
+            int mid=lo+(hi-lo)/2;
+            if(solve(weights,mid,days))
+                hi=mid;
+            else
+                lo=mid+1;
+        }
+        return lo;
     }
 };
+
