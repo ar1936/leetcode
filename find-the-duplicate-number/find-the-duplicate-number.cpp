@@ -1,26 +1,22 @@
-class Solution
-{
+class Solution {
 public:
-    int findDuplicate(vector<int> &nums)
-    {
-        int slow = nums[0];
-        int fast = nums[nums[0]];
+    int findDuplicate(vector<int>& nums) {
+        // Find the intersection point of the two runners.
+        int tortoise = nums[0];
+        int hare = nums[0];
+        do {
+            tortoise = nums[tortoise];
+            hare = nums[nums[hare]];
+        } while (tortoise != hare);
 
-        while (fast != slow)
-        {
-            slow = nums[slow];
-            fast = nums[nums[fast]];
+        // Find the "entrance" to the cycle.
+        int ptr1 = nums[0];
+        int ptr2 = tortoise;
+        while (ptr1 != ptr2) {
+            ptr1 = nums[ptr1];
+            ptr2 = nums[ptr2];
         }
 
-        fast = 0;
-        while (slow != fast)
-        {
-            slow = nums[slow];
-            fast = nums[fast];
-        }
-
-        //slow or fast doesn't matter here
-        return slow;
+        return ptr1;
     }
 };
-
