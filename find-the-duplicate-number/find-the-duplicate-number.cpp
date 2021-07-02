@@ -4,11 +4,11 @@ public:
         // Find the intersection point of the two runners.
         int tortoise = nums[0];
         int hare = nums[0];
-        do {
+        while(true){
             tortoise = nums[tortoise];
             hare = nums[nums[hare]];
-        } while (tortoise != hare);
-
+            if(tortoise == hare) break;
+        }
         // Find the "entrance" to the cycle.
         int ptr1 = nums[0];
         int ptr2 = tortoise;
@@ -20,3 +20,4 @@ public:
         return ptr1;
     }
 };
+
