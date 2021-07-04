@@ -1,23 +1,20 @@
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        int t[m+1][n+1];
-        memset(t,0,sizeof(t));
-        for(int i=0;i<=m;i++)
-        {
-            for(int j=0;j<=n;j++)
-            {
-                if(j==1||i==1)
-                    t[i][j]=1;
+        vector<vector<int>>mat(m+1,vector<int>(n+1,0));
+        for(int i=0;i<=m;i++){
+            for(int j=0;j<=n;j++){
+                if(i==1||j==1)
+                    mat[i][j]=1;
+                else
+                    mat[i][j]=0;
             }
         }
-        for(int i=2;i<=m;i++)
-        {
-            for(int j=2;j<=n;j++)
-            {
-                t[i][j]=t[i-1][j]+t[i][j-1];
+        for(int i=2;i<=m;i++){
+            for(int j=2;j<=n;j++){
+                mat[i][j]+=mat[i-1][j]+mat[i][j-1];
             }
         }
-        return t[m][n];
+        return mat[m][n];
     }
 };
