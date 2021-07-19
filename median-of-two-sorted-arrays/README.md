@@ -1,3 +1,4 @@
+[Discussion Post (created on 20/6/2021 at 0:12)](https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/1349044/Simple-solution-using-multiset)  
 <h2>4. Median of Two Sorted Arrays</h2><h3>Hard</h3><hr><div><p>Given two sorted arrays <code>nums1</code> and <code>nums2</code> of size <code>m</code> and <code>n</code> respectively, return <strong>the median</strong> of the two sorted arrays.</p>
 
 <p>The overall run time complexity should be <code>O(log (m+n))</code>.</p>
