@@ -20,9 +20,12 @@ public:
     int numberOfSubarrays(vector<int>& nums, int k) {
         int res = 0, sum = 0, n = nums.size();
         unordered_map<int, int> mpp;
+        for(int i=0;i<nums.size();i++){
+            nums[i]=nums[i]%2;
+        }
         for (int i = 0; i < n; ++i) {
             mpp[sum]++;
-            sum += nums[i] & 1;
+            sum += nums[i];
             res += mpp[sum - k];
         }
         return res;
