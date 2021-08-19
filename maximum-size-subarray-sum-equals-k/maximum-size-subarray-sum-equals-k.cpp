@@ -1,20 +1,17 @@
 class Solution {
 public:
     int maxSubArrayLen(vector<int>& nums, int k) {
-        unordered_map<int, int> sums;
-        int cur_sum = 0;
-        int max_len = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            cur_sum += nums[i];
-            if (cur_sum == k) {
-                max_len = i + 1;
-            } else if (sums.find(cur_sum - k) != sums.end()) {
-                max_len = max(max_len, i - sums[cur_sum - k]);
-            }
-            if (sums.find(cur_sum) == sums.end()) {
-                sums[cur_sum] = i;
-            }            
+        unordered_map<int,int>mp;
+        int sum=0,ans=0;
+        for(int i=0;i<nums.size();i++){
+            sum+=nums[i];
+            if(sum==k)
+                ans=i+1;
+            else if(mp.find(sum-k)!=mp.end())
+                ans=max(ans,i-mp[sum-k]);
+           if(mp.find(sum)==mp.end())
+                mp[sum]=i;
         }
-        return max_len;
+        return ans;
     }
 };
