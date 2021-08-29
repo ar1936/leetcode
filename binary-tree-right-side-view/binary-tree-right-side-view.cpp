@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    vector<int> rightSideView(TreeNode* root) {
+    vector<int> rightSideView1(TreeNode* root) {
         vector<vector<int>>temp;
         if(root==NULL)
             return {};
@@ -36,6 +36,26 @@ public:
         for(auto x:temp){
             ans.push_back(x.back());
         }
+        return ans;
+    }
+    void dfs(TreeNode *root, int height, vector<int>&ans){
+        if(height==ans.size())
+        {
+            ans.push_back(root->val);
+        }
+        
+        if(root->right!=NULL)
+            dfs(root->right,height+1,ans);
+        
+        if(root->left!=NULL)
+            dfs(root->left,height+1,ans);
+        
+    }
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int>ans;
+        if(root==NULL)
+            return ans;
+        dfs(root,0,ans);
         return ans;
     }
 };
