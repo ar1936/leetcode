@@ -18,7 +18,7 @@ class Solution {
         return size;
     }
 public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
+    ListNode* removeNthFromEnd1(ListNode* head, int n) {
         int size=get_size(head);
         if(size==1&&n==1)
             return NULL;
@@ -33,4 +33,18 @@ public:
         temp->next=temp->next->next;
         return head;
     }
+    
+    
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode *fast = head, *slow = head;
+        for (int i = 0; i < n; i++) 
+            fast = fast->next;
+        if (!fast) 
+            return head->next;
+        while (fast->next) 
+            fast = fast->next, slow = slow->next;
+        slow->next = slow->next->next;
+        return head;
+    }
+
 };
