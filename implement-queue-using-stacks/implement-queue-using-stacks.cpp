@@ -1,39 +1,50 @@
 class MyQueue {
 public:
-    stack<int>newest, oldest;
-    MyQueue() {   
+    stack<int>input,output;
+    MyQueue() {
     }
-
     void push(int x) {
-        newest.push(x);
-    }
-    
-    void shiftstack(){
-        if(oldest.empty())
-            while(!newest.empty()){
-                int val = newest.top();
-                oldest.push(val);
-                newest.pop();
+        if(input.size()>0){
+            while(input.size()>0){
+                int p=input.top();
+                output.push(p);
+                input.pop();
             }
+        }
+        input.push(x);
+        if(output.size()>0){
+            while(output.size()>0){
+                int pp=output.top();
+                input.push(pp);
+                output.pop();
+            }
+        }
     }
-    
     int pop() {
-        shiftstack();
-        int val = oldest.top();
-        oldest.pop();
-        return val;
+        if(input.size()>0){
+            int y=input.top();
+            input.pop();
+            return y;
+        }
+        return -1;
     }
     
     int peek() {
-        shiftstack();
-        return oldest.top();
+        if(input.size()>0){
+            int z=input.top();
+            return z;
+        }
+        return -1;
     }
-    
     bool empty() {
-        return newest.empty() && oldest.empty();
+        if(input.size()==0){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 };
-
 
 /**
  * Your MyQueue object will be instantiated and called as such:
@@ -43,30 +54,3 @@ public:
  * int param_3 = obj->peek();
  * bool param_4 = obj->empty();
  */
-
-
-
-// class Queue {
-//     stack<int> input, output;
-// public:
-
-//     void push(int x) {
-//         input.push(x);
-//     }
-
-//     void pop(void) {
-//         peek();
-//         output.pop();
-//     }
-
-//     int peek(void) {
-//         if (output.empty())
-//             while (input.size())
-//                 output.push(input.top()), input.pop();
-//         return output.top();
-//     }
-
-//     bool empty(void) {
-//         return input.empty() && output.empty();
-//     }
-// };
