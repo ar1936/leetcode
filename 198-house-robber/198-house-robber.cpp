@@ -37,8 +37,9 @@
 
 class Solution {
     public:
-       int dp[1000];
-       int solve(vector<int>&v, int n){
+       // vector<int>dp(1000,-1);
+        // int dp[1000];
+       int solve(vector<int>&v, int n,vector<int>&dp){
         if(n==1){
             dp[n]=v[0];
             return dp[n];
@@ -50,12 +51,13 @@ class Solution {
         if(dp[n]!=-1){
             return dp[n];
         }
-        dp[n] = max(solve(v,n-2)+v[n-1],solve(v,n-1));
+        dp[n] = max(solve(v,n-2,dp)+v[n-1],solve(v,n-1,dp));
         return dp[n];
     }
 public:
     int rob(vector<int>& nums) {
-        memset(dp,-1,sizeof(dp));
-        return solve(nums,nums.size());
+        vector<int>dp(1000,-1);
+        // memset(dp,-1,sizeof(dp));
+        return solve(nums,nums.size(),dp);
     }
 };
