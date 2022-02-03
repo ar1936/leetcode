@@ -36,9 +36,10 @@
 
 
 class Solution {
+    private:
+        vector<int>dp;
     public:
-       // vector<int>dp(1000,-1);
-        // int dp[1000];
+       Solution() : dp(1000,-1) {}
        int solve(vector<int>&v, int n,vector<int>&dp){
         if(n==1){
             dp[n]=v[0];
@@ -56,7 +57,7 @@ class Solution {
     }
 public:
     int rob(vector<int>& nums) {
-        vector<int>dp(1000,-1);
+        // vector<int>dp(1000,-1);
         // memset(dp,-1,sizeof(dp));
         return solve(nums,nums.size(),dp);
     }
