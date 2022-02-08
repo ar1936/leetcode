@@ -14,15 +14,35 @@ class Solution {
 public:
     void solve(vector<vector<char>>& board) {
         int row=board.size(),col=board[0].size();
+//         for(int i=0;i<row;i++){
+//             dfs(board,i,0);
+//             if(col>1)
+//                 dfs(board,i,col-1);
+//         }
+//         for(int j=0;j<col;j++){
+//             dfs(board,0,j);
+//             if(row>1)
+//                 dfs(board,row-1,j);
+//         }
+        
         for(int i=0;i<row;i++){
-            dfs(board,i,0);
-            if(col>1)
-                dfs(board,i,col-1);
-        }
-        for(int j=0;j<col;j++){
-            dfs(board,0,j);
-            if(row>1)
-                dfs(board,row-1,j);
+            for(int j=0;j<col;j++){
+                // if(j==0){
+                //     dfs(board,i,j);
+                // }
+                // if(j==col-1){
+                //     dfs(board,i,j);
+                // }
+                // if(i==0){
+                //     dfs(board,i,j);
+                // }
+                // if(i==row-1){
+                //     dfs(board,i,j);
+                // }
+                if(i==0||j==0||i==row-1||j==col-1){
+                    dfs(board,i,j);
+                }
+            }
         }
         for(int i=0;i<row;i++){
             for(int j=0;j<col;j++){
