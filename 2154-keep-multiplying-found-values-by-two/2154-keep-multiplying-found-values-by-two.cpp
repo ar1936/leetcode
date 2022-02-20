@@ -1,11 +1,8 @@
 class Solution {
 public:
     int findFinalValue(vector<int>& nums, int original) {
-        set<int>st;
-        for(auto x:nums){
-            st.insert(x);
-        }
-        while(st.find(original)!=st.end()){
+        sort(nums.begin(),nums.end());
+        while(binary_search(nums.begin(),nums.end(),original)){
             original=2*original;
         }
         return original;
