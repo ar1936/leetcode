@@ -4,7 +4,7 @@ public:
         if(s.size()<k)
             return 0;
         int ans=0;
-        map<char,int>mp;
+        unordered_map<char,int>mp;
         for(int i=0;i<k;i++){
             mp[s[i]]++;
         }
