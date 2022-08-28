@@ -1,3 +1,4 @@
+[Discussion Post (created on 28/7/2022 at 15:18)](https://leetcode.com/problems/climbing-stairs/discuss/2494912/C%2B%2B-Fibonacci-with-memo-DP)  
 <h2>70. Climbing Stairs</h2><h3>Easy</h3><hr><div><p>You are climbing a staircase. It takes <code>n</code> steps to reach the top.</p>
 
 <p>Each time you can either climb <code>1</code> or <code>2</code> steps. In how many distinct ways can you climb to the top?</p>
