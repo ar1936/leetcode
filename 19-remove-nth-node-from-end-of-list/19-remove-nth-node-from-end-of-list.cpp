@@ -9,26 +9,38 @@
  * };
  */
 class Solution {
+    void solve(ListNode * tmp , int n){
+        if(n==1)
+        {
+            tmp->next = tmp->next->next;
+            return ;
+        }
+        solve(tmp->next,n-1);
+    }
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode *tmp = head;
         int sz=0;
+        ListNode * tmp = head;
         while(tmp){
             sz++;
-            tmp=tmp->next;
+            tmp = tmp -> next;
         }
-        if(sz==1){
+        if(sz==1)
             return NULL;
+        if(sz==2){
+            if(n==2){
+                return head->next;
+            }
+            else{
+                head->next=NULL;
+                return head;
+            }
         }
         if(sz==n){
-            head=head->next;
-            return head;
+            return head->next;
         }
-        tmp=head;
-        for(int i=0;i<(sz-n-1);i++){
-            tmp = tmp->next;
-        }
-        tmp->next = tmp->next ->next;
+        tmp = head;
+        solve(tmp,sz-n);
         return head;
     }
 };
