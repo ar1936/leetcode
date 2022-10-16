@@ -1,0 +1,1 @@
+select distinct(a.email) from person a inner join person b on a.id <> b.id where a.email=b.email;
