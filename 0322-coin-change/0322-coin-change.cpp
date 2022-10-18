@@ -1,20 +1,27 @@
 class Solution {
-int dp[13][10001];
+int dp[100][100000];
 int solve(int n , int amount , vector<int>&v){
-      if(n==0||amount==0){
-        if(n==0){
-          return 1e9;
+       for(int i=0;i<=n;i++){
+            for(int j=0;j<=amount;j++){
+                if(i==0){
+                    dp[i][j]=1e9;
+                }
+                if(j==0){
+                    dp[i][j]=0;
+                }
+            }
         }
-        return 0;
-      }
-      if(dp[n][amount]!=-1)
-          return dp[n][amount];
-      if(amount>=v[n-1]){
-        return dp[n][amount]=min(solve(n,amount-v[n-1],v)+1,solve(n-1,amount,v));
-      }
-      else{
-        return dp[n][amount]=solve(n-1,amount,v);
-      }
+     for(int i=1;i<=n;i++){
+            for(int j=1;j<=amount;j++){
+                if(j>=v[i-1]){
+                    dp[i][j]=min(dp[i][j-v[i-1]]+1,dp[i-1][j]);
+                }
+                else{
+                    dp[i][j]=dp[i-1][j];
+                }
+            }
+        }     
+    return dp[n][amount];
 } 
 public:
     int coinChange(vector<int>& coins, int amount) {
