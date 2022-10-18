@@ -1,5 +1,5 @@
 class Solution {
-int dp[100][100000];
+int dp[13][10001];
 int solve(int n , int amount , vector<int>&v){
        for(int i=0;i<=n;i++){
             for(int j=0;j<=amount;j++){
