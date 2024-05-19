@@ -1,35 +1,30 @@
 class Solution:
-    def maxProfit(self, nums: List[int]) -> int:
-        mp = {}
-        def solve(ind,price,is_sell):
-            if ind >= len(nums):
+    def maxProfit(self, prices: List[int]) -> int:
+        memo = {}
+        
+        def dp(ind, holding):
+            # Base case: If we've gone through all the days
+            if ind >= len(prices):
                 return 0
-            if (ind,price,is_sell) in mp:
-                return mp[(ind,price,is_sell)]
-            if is_sell and (nums[ind]-price)>0: 
-                mp[(ind,price,is_sell)] = max(solve(ind+2,0,False)+(nums[ind]-price), solve(ind+1,price,is_sell))
-            else:
-                mp[(ind,price,is_sell)] =  solve(ind+1,nums[ind],True)
-            return mp[(ind,price,is_sell)]
-        return solve(0,0,False)
-
-
-# class Solution:
-#     def maxProfit(self, nums: List[int]) -> int:
-#         memo = {}
-
-#         def solve(ind, price, is_sell):
-#             if ind >= len(nums):
-#                 return 0
-#             if (ind, price, is_sell) in memo:
-#                 return memo[(ind, price, is_sell)]
-
-#             if is_sell and (nums[ind] - price) > 0:
-#                 memo[(ind, price, is_sell)] = max(solve(ind + 2, 0, False) + (nums[ind] - price), solve(ind + 1, price, is_sell))
-#             else:
-#                 memo[(ind, price, is_sell)] = solve(ind + 1, nums[ind], True)
             
-#             # memo[(ind, price, is_sell)] = result
-#             return memo[(ind, price, is_sell)]
-
-#         return solve(0, 0, False)
+            # Check if we've already solved this subproblem
+            if (ind, holding) in memo:
+                return memo[(ind, holding)]
+            
+            # If we are holding a stock, we have two choices: sell it or keep holding it
+            if holding:
+                sell = prices[ind] + dp(ind + 2, False)  # Sell and skip one day (cooldown)
+                keep_holding = dp(ind + 1, True)  # Move to the next day without selling
+                profit = max(sell, keep_holding)
+            else:
+                # If we are not holding a stock, we have two choices: buy it or do nothing
+                buy = -prices[ind] + dp(ind + 1, True)  # Buy and hold the stock
+                do_nothing = dp(ind + 1, False)  # Move to the next day without buying
+                profit = max(buy, do_nothing)
+            
+            # Save the result in the memo dictionary
+            memo[(ind, holding)] = profit
+            return profit
+        
+        # Start from day 0 without holding any stock
+        return dp(0, False)
