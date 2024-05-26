@@ -11,7 +11,6 @@ class Solution:
             row = set()
             for i in range(9):
                 if board[i][j]!='.' and board[i][y] in row:
-                    print(1,i,y)
                     return False
                 row.add(board[i][y])
             return True
@@ -20,7 +19,6 @@ class Solution:
             col = set()
             for j in range(9):
                 if board[i][j]!='.' and board[x][j] in col:
-                    print(2,x,j)
                     return False
                 col.add(board[x][j])
             return True
@@ -38,7 +36,6 @@ class Solution:
                 for j in range(j_lower, j_upper):
                     if((i//3 + j//3) == (x//3 + y//3)):
                         if board[i][j]!='.' and  board[i][j] in small_mat:
-                            print(3,i,j)
                             return False
                         small_mat.add(board[i][j])
             return True
@@ -46,7 +43,6 @@ class Solution:
         for i in range(9):
             for j in range(9):
                 if board[i][j]!= '.' and (row_check(i,j) == False or col_check(i,j)==False or small_mat_check(i,j)==False):
-                    print(i,j)
                     return False
         return True
                     
