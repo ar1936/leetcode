@@ -1,10 +1,6 @@
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         dp = [[-1]*len(text2) for _ in range(len(text1))]
-        # for i in range(len(text1)+1):
-        #     dp[i][0] = 0
-        # for j in range(len(text2)+1):
-        #     dp[0][j] = 0
         def solve(n,m):
             if n == len(text1) or m == len(text2):
                 return 0
