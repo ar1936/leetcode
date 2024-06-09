@@ -1,48 +1,42 @@
-# k = (x // 3) * 3 + y // 3
-#             i_lower = (k // 3) * 3
-#             i_upper = i_lower + 3 
-
-#             j_lower = (k % 3) * 3
-#             j_upper = j_lower + 3  
-            
 class Solution:
-    def isValidSudoku(self, board: List[List[str]]) -> bool:
-        def row_check(x,y):
-            row = set()
-            for i in range(9):
-                if board[i][j]!='.' and board[i][y] in row:
+    def isValidSudoku(self, mat: List[List[str]]) -> bool:
+        n = len(mat)
+        m = len(mat[0])
+
+        def check_row(x,y):
+            row_set = set()
+            for i in range(m):
+                if mat[x][i] != '.' and mat[x][i] in row_set:
+                    print(3,x,i)
                     return False
-                row.add(board[i][y])
-            return True
-
-        def col_check(x,y):
-            col = set()
-            for j in range(9):
-                if board[i][j]!='.' and board[x][j] in col:
-                    return False
-                col.add(board[x][j])
-            return True
-
-        def small_mat_check(x,y):
-            small_mat = set()
-            k = (x // 3) * 3 + y // 3
-            i_lower = (k // 3) * 3
-            i_upper = i_lower + 3 
-
-            j_lower = (k % 3) * 3
-            j_upper = j_lower + 3  
-            
-            for i in range(i_lower, i_upper):
-                for j in range(j_lower, j_upper):
-                    if((i//3 + j//3) == (x//3 + y//3)):
-                        if board[i][j]!='.' and  board[i][j] in small_mat:
-                            return False
-                        small_mat.add(board[i][j])
+                row_set.add(mat[x][i])
             return True
         
-        for i in range(9):
-            for j in range(9):
-                if board[i][j]!= '.' and (row_check(i,j) == False or col_check(i,j)==False or small_mat_check(i,j)==False):
+        def check_col(x,y):
+            col_set = set()
+            for i in range(m):
+                if mat[i][y] != '.' and mat[i][y] in col_set:
+                    print(2,i,y)
                     return False
+                col_set.add(mat[i][y])
+            return True
+
+        def check_mat(x, y):
+            mat_set = set()
+            i_lower = (x // 3) * 3
+            j_lower = (y // 3) * 3
+            for i in range(i_lower, i_lower + 3):
+                for j in range(j_lower, j_lower + 3):
+                    if mat[i][j] != '.' and mat[i][j] in mat_set: 
+                        return False
+                    mat_set.add(mat[i][j])
+            return True
+
+
+        for i in range(n):
+            for j in range(m):
+                if mat[i][j] != '.':
+                    if check_row(i,j) == False or check_col(i,j) == False or  check_mat(i,j) == False:
+                        return False
         return True
-                    
+
