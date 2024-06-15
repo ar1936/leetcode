@@ -15,7 +15,6 @@ class Solution:
                 ans[0] = max(max_val-min_val,ans[0])
             left_val = solve(root.left,max_val,min_val,ans)
             right_val = solve(root.right,max_val,min_val,ans)
-            return max(left_val,right_val)
         ans = [0]
         solve(root,root.val,root.val,ans)
         return ans[0]
