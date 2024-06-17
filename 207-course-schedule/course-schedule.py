@@ -8,10 +8,12 @@ class Solution:
         queue = deque([i for i in range(n) if indegree[i]==0])
         cnt = 0
         while queue:
-            u = queue.popleft()
-            cnt+=1
-            for v in adj[u]:
-                indegree[v]-=1
-                if indegree[v] == 0:
-                    queue.append(v)
+            sz = len(queue)
+            for _ in range(sz):
+                u = queue.popleft()
+                cnt+=1
+                for v in adj[u]:
+                    indegree[v]-=1
+                    if indegree[v] == 0:
+                        queue.append(v)
         return cnt == n
