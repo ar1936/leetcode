@@ -7,10 +7,10 @@ class Solution:
             return sum<=h
         low = 1
         high = max(piles)
-        while low<high:
+        while low<=high:
             mid = low + (high-low)//2
             if solve(mid):
-                high = mid
+                high = mid-1
             else:
                 low = mid+1
         return low
