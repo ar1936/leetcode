@@ -1,40 +1,36 @@
+class TrieNode:
+    def __init__(self):
+        self.is_finish = False
+        self.next = defaultdict(TrieNode)
+        
 class WordDictionary:
 
     def __init__(self):
-        self.mp = defaultdict(int)
+        self.root = TrieNode()
+        self.mp = defaultdict(set) # this will help us to store char at specific index
+            
     def addWord(self, word: str) -> None:
-        self.mp[word] += 1
+        curr = self.root
+        for ind,c in enumerate(word):
+            curr = curr.next[c]
+            self.mp[ind].add(c)
+        curr.is_finish = True
+
 
     def search(self, word: str) -> bool:
-        count_dot = 0
-        dot_ind = []
-        if word in self.mp:
-            return True
-        for ind, s in enumerate(word):
-            if s == '.':
-                count_dot += 1
-                dot_ind.append(ind)
-        
-        if count_dot == 1:
-            for i in range(26):
-                temp_word = list(word)
-                temp_word[dot_ind[0]] = chr(i + 97)
-                new_word = ''.join(temp_word)
-                if new_word in self.mp:
-                    return True
-        
-        if count_dot == 2:
-            for i in range(26):
-                for j in range(26):
-                    temp_word = list(word)
-                    temp_word[dot_ind[0]] = chr(i + 97)
-                    temp_word[dot_ind[1]] = chr(j + 97)
-                    new_word = ''.join(temp_word)
-                    if new_word in self.mp:
+        def dfs(node, index):
+            if index == len(word):
+                return node.is_finish
+            if word[index] == '.':
+                for child in node.next.values():
+                    if dfs(child, index + 1):
                         return True
-        
-        return False
+            else:
+                if word[index] in node.next:
+                    return dfs(node.next[word[index]], index + 1)
+            return False
 
+        return dfs(self.root, 0)
 
 # Your WordDictionary object will be instantiated and called as such:
 # obj = WordDictionary()
