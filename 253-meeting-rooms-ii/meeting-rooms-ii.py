@@ -1,17 +1,14 @@
-from sortedcontainers import SortedDict
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        mp = SortedDict()
-        for l1,l2 in intervals:
-            if l1 not in mp:
-                mp[l1] = 0
-            if l2 not in mp:
-                mp[l2] = 0
-            mp[l1] += 1
-            mp[l2] -= 1
-        ans = 0 
-        sum = 0
-        for k in mp:
-            sum+=mp[k]
-            ans = max(ans,sum)
-        return  ans
+        if len(intervals) == 0:
+            return 0
+        free_room = []
+        intervals = sorted(intervals, key = lambda x:x[0])
+        heapq.heappush(free_room, intervals[0][1])
+
+        for i in intervals[1:]:
+            if free_room[0]<=i[0]:
+                heapq.heappop(free_room)
+            heapq.heappush(free_room, i[1])
+
+        return len(free_room)
