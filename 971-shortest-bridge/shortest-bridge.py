@@ -22,19 +22,18 @@ class Solution:
                     break
             if flag:
                 break
-                
-        ans = 10000000
+
         q = deque()
         for (x,y) in island_ind:
             q.append((x,y,0))
         while q:
             r,c, cnt= q.popleft()
             if grid[r][c]==1:
-                ans = min(cnt,ans)
+                return cnt - 1
             for i in range(4):
                 new_x, new_y = r+dx[i], c + dy[i]
                 if new_x>=0 and new_x<n and new_y>=0 and new_y<m and (new_x,new_y) not in island_ind:
                     q.append((new_x,new_y,cnt+1))
                     island_ind.add((new_x,new_y))
 
-        return ans - 1
+        return  - 1
