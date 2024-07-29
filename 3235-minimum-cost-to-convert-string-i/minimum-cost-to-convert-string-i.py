@@ -1,48 +1,23 @@
 class Solution:
-    def minimumCost(
-        self,
-        source: str,
-        target: str,
-        original: List[str],
-        changed: List[str],
-        cost: List[int],
-    ) -> int:
-        # Initialize result to store the total minimum cost
-        total_cost = 0
-
-        # Initialize a 2D list to store the minimum transformation cost
-        # between any two characters
-        min_cost = [[float("inf")] * 26 for _ in range(26)]
-
-        # Fill the initial transformation costs from the given original,
-        # changed, and cost arrays
-        for orig, chg, cst in zip(original, changed, cost):
-            start_char = ord(orig) - ord("a")
-            end_char = ord(chg) - ord("a")
-            min_cost[start_char][end_char] = min(
-                min_cost[start_char][end_char], cst
-            )
-
-        # Use Floyd-Warshall algorithm to find the shortest path between any
-        # two characters
+    def minimumCost(self, s: str, t: str, o: List[str], c: List[str], cost: List[int]) -> int:
+        mat = [[10**9]*26 for _ in range(26)]
+        for i in range(26):
+            mat[i][i] = 0
+        for i in range(len(cost)):
+            mat[ord(o[i])-97][ord(c[i])-97] = min(mat[ord(o[i])-97][ord(c[i])-97], cost[i])
+        
         for k in range(26):
             for i in range(26):
                 for j in range(26):
-                    min_cost[i][j] = min(
-                        min_cost[i][j], min_cost[i][k] + min_cost[k][j]
-                    )
-
-        # Calculate the total minimum cost to transform the source string to
-        # the target string
-        for src, tgt in zip(source, target):
-            if src == tgt:
-                continue
-            source_char = ord(src) - ord("a")
-            target_char = ord(tgt) - ord("a")
-
-            # If the transformation is not possible, return -1
-            if min_cost[source_char][target_char] == float("inf"):
-                return -1
-            total_cost += min_cost[source_char][target_char]
-
-        return total_cost
+                    mat[i][j] = min(mat[i][j], mat[i][k]+mat[k][j])
+        
+        ans = 0
+        for i in range(len(t)):
+            st = ord(s[i]) - 97
+            tt = ord(t[i]) - 97
+            if s[i]!=t[i]:
+                if mat[st][tt] == 10**9:
+                    return -1
+                else:
+                    ans+=mat[st][tt]
+        return ans
