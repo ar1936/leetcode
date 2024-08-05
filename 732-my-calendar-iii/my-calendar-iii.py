@@ -1,16 +1,15 @@
+from sortedcontainers import SortedDict
 class MyCalendarThree:
 
     def __init__(self):
-        self.mp = defaultdict(int)
+        self.mp = SortedDict()
 
-    def book(self, start: int, end: int) -> int:
+    def book(self, s: int, e: int) -> int:
+        self.mp[s] = self.mp.get(s,0) + 1
+        self.mp[e] = self.mp.get(e,0) - 1 
         ans = 0
-        self.mp[start] += 1
-        self.mp[end] -= 1 
         sum = 0
-        for key in sorted(self.mp):
-            sum+=self.mp[key]
-            ans = max(ans,sum)
+        for k in self.mp:
+            sum += self.mp[k]
+            ans = max(sum,ans)
         return ans
-
-
