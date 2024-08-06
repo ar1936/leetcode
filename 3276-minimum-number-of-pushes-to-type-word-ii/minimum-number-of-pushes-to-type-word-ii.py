@@ -1,24 +1,19 @@
 class Solution:
     def minimumPushes(self, word: str) -> int:
         mp = defaultdict(int)
-        arr = []
         for s in word:
             mp[s] += 1
-        for k in mp:
-            arr.append(mp[k])
-        if len(arr)<=8:
+        if len(mp)<=8:
             return len(word)
-        arr = sorted(arr, reverse = True)
+        # can we optimise this and solve it without sorting ??? yes 
         ans = 0
-        cnt = 0
-        for i in range(len(arr)):
-            cnt = i+1
-            if cnt<=8:
-                ans+=arr[i]
-            elif cnt<=16:
-                ans+= 2*arr[i]
-            elif cnt<=24:
-                ans+= 3*arr[i]
+        for i, v in enumerate(sorted(mp.values(), reverse = True)):
+            if (i + 1)<=8:
+                ans+=v
+            elif (i + 1)<=16:
+                ans+= 2*v
+            elif (i + 1)<=24:
+                ans+= 3*v
             else:
-                ans+= 4*arr[i]
+                ans+= 4*v
         return ans
