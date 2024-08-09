@@ -17,11 +17,11 @@ class Solution:
         
         while q:
             x,y, step = q.popleft()
-            rooms[x][y] = step
             for k in range(4):
                 new_x,new_y, new_step = x+dx[k] , y + dy[k], step + 1
                 if 0<=new_x<n and 0<=new_y<m and rooms[new_x][new_y] != -1:
                     if (new_x,new_y) not in visited:
                         visited.add((new_x,new_y))
                         q.append((new_x,new_y,new_step))
+                        rooms[new_x][new_y] = new_step
         return rooms
