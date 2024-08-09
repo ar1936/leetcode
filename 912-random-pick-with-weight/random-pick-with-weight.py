@@ -9,12 +9,14 @@ class Solution:
                 self.pre_sum.append(w[i]+self.pre_sum[-1])
              
     def pickIndex(self) -> int:
-        ind = random.random() * self.pre_sum[-1]
+        val = random.random() * self.pre_sum[-1]
         # ans = 0
-        for i in range(len(self.pre_sum)):
-            if self.pre_sum[i]>ind:
-                return i
-        return -1
+        # for i in range(len(self.pre_sum)):
+        #     if self.pre_sum[i]>val:
+        #         return i
+        # return -1
+        return bisect_right(self.pre_sum, val)
+
 
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(w)
