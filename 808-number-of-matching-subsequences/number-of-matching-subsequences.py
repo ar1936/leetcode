@@ -1,18 +1,28 @@
+from collections import defaultdict
+import bisect
+
 class Solution:
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
-        mp = defaultdict(int)
+        # Preprocess string s
+        char_indices = defaultdict(list)
+        for index, char in enumerate(s):
+            char_indices[char].append(index)
+        
+        def is_subsequence(word):
+            current_position = -1
+            for char in word:
+                if char not in char_indices:
+                    return False
+                # Find the smallest index greater than current_position
+                i = bisect.bisect_right(char_indices[char], current_position)
+                if i == len(char_indices[char]):
+                    return False
+                current_position = char_indices[char][i]
+            return True
+        
+        ans = 0
         for word in words:
-            mp[word]+=1
-        ans = 0 
-        for word in mp:
-            i = 0
-            j = 0
-            while i<len(s) and j<len(word):
-                if s[i] == word[j]:
-                    i+=1
-                    j+=1
-                else:
-                    i+=1
-            if j == len(word):
-                ans+=mp[word]
+            if is_subsequence(word):
+                ans += 1
+        
         return ans
