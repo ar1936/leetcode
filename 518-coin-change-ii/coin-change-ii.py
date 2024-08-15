@@ -1,17 +1,16 @@
 class Solution:
-    def change(self, find_sum: int, nums: List[int]) -> int:
-        dp = [[-1]*(find_sum+1) for _ in range(len(nums)+1)]
+    def change(self, a: int, c: List[int]) -> int:
+        dp = [[-1]* (len(c)+1) for _ in range(a+1)]
         def solve(ind, su):
-
-            if ind >= len(nums) or su>find_sum:
-                return 0
-            if su == find_sum:
-                return 1
-            if dp[ind][su]!=-1:
-                return dp[ind][su]
-            if nums[ind]<=find_sum:
-                dp[ind][su] =  solve(ind+1,su) + solve(ind, su + nums[ind])
+            if a == su:
+                return 1 
+            if ind>=len(c) or su>a:
+                return 0 
+            if dp[su][ind] != -1:
+                return dp[su][ind]
+            if c[ind] + su <= a:
+                dp[su][ind] =  solve(ind,su+c[ind]) + solve(ind+1, su)
             else:
-                dp[ind][su] = solve(ind+1, su) 
-            return dp[ind][su]
+                dp[su][ind] =  solve(ind+1, su)
+            return dp[su][ind]
         return solve(0,0)
