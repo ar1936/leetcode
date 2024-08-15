@@ -1,20 +1,16 @@
 class Solution:
-    def coinChange(self, nums: List[int], amount: int) -> int:
-        def solve(ind, sum, dp):
-            if sum == amount:
+    def coinChange(self, c: List[int], a: int) -> int:
+        dp = [[-1]*(len(c)+1) for _ in range(a+1)]
+        def solve(ind, su):
+            if su == a:
                 return 0
-            if sum > amount:
+            if su>a or ind>=len(c):
                 return 10**9
-            if ind == len(nums):
-                return 10**9
-            if dp[ind][sum] != -1:
-                return dp[ind][sum]
-            if nums[ind]<=(amount-sum):
-                dp[ind][sum] = min(solve(ind+1,sum,dp), solve(ind,sum+nums[ind],dp)+1)
+            if dp[su][ind] != -1:
+                return dp[su][ind]
+            if c[ind] + su <= a:
+                dp[su][ind] = min(solve(ind,su+c[ind])+1, solve(ind+1,su))
             else:
-                dp[ind][sum] = solve(ind+1,sum,dp)
-            return dp[ind][sum]
-        ans = 0
-        dp = [[-1]*(amount+1) for _ in range(len(nums)+1)]
-        ans = solve(0,0,dp)
-        return -1 if ans == 10**9 else ans 
+                dp[su][ind] =  solve(ind+1,su)
+            return dp[su][ind]
+        return -1 if solve(0,0) == 10**9 else solve(0,0)
