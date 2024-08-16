@@ -10,11 +10,15 @@ class Solution:
         def solve(node):
             nonlocal ans
             if node is None:
-                return -1
-            left = solve(node.left) + 1
-            right = solve(node.right) + 1
-            tmp = max(left, right)
-            ans = max(left+right,ans)
-            return tmp
+                return 0 
+            left = 0 
+            right = 0
+            left = solve(node.left)
+            right = solve(node.right)
+            # if this node have maxium diameeter then 
+            ans = max(ans,left+right)
+            return max(left,right)+1
+        if root is None:
+            return 0
         solve(root)
         return ans
