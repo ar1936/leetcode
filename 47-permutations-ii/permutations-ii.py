@@ -1,21 +1,19 @@
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
-        nums.sort()
+        nums = sorted(nums)
         ans = []
-        arr = []
-        def solve(ind: int, used: List[bool]) -> None:
-            if ind == len(nums):
-                ans.append(tuple(arr))
-                return
-            for i in range(len(nums)):
-                if used[i] or (i > 0 and nums[i] == nums[i - 1] and not used[i - 1]):
+        def solve(ind):
+            if ind== len(nums):
+                ans.append(list(nums))
+                return 
+            used = set()
+            for i in range(ind, len(nums)):
+                if nums[i] in used:
                     continue
-                used[i] = True
-                arr.append(nums[i])
-                solve(ind + 1, used)
-                arr.pop()
-                used[i] = False
+                used.add(nums[i])
+                nums[i], nums[ind] = nums[ind], nums[i]
+                solve(ind+1)
+                nums[i], nums[ind] = nums[ind], nums[i]
                 
-        used = [False] * len(nums)
-        solve(0, used)
+        solve(0)
         return ans
