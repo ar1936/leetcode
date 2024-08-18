@@ -1,15 +1,16 @@
 class Solution:
     def combinationSum(self, nums: List[int], target: int) -> List[List[int]]:
-        def solve(ind,tmp,sum,ans):
-            if target == sum:
-                ans.append(tmp.copy())
+        ans = []
+        tmp = []
+        def solve(ind, sum):
+            if sum == target:
+                ans.append(list(tmp))
                 return 
-            if ind>=len(nums) or sum>target:
+            if sum>target or ind>=len(nums):
                 return 
             tmp.append(nums[ind])
-            solve(ind,tmp,sum+nums[ind],ans)
+            solve(ind,sum+nums[ind])
             tmp.pop()
-            solve(ind+1,tmp,sum,ans)
-        ans = []
-        solve(0,[],0,ans)
+            solve(ind+1,sum)
+        solve(0,0)
         return ans
