@@ -1,33 +1,20 @@
-class Solution:
-    def peakIndexInMountainArray(self, nums: List[int]) -> int:
-        # Get the length of the array
-        n = len(nums)
-        
-        # Initialize low and high pointers for binary search
-        low, high = 0, n-1
-        
-        # Edge case: if there's only one element or the first element is a peak
-        if n == 1 or nums[0] > nums[1]:
-            return 0
-        
-        # Edge case: if the last element is a peak
-        if nums[-1] > nums[-2]:
-            return n-1
-        
-        # Binary search loop
-        while low <= high:
-            # Calculate the middle index to avoid overflow
-            mid = ((high-low)//2) + low
-            
-            # Check if the peak is in the right half
-            if nums[mid] < nums[mid+1]:
-                low = mid + 1
-            
-            # Check if the peak is in the left half
-            elif nums[mid] < nums[mid-1]:
-                high = mid - 1
-            
-            # If neither, the current element is a peak
-            else:
-                return mid
+from typing import List
 
+class Solution:
+    def peakIndexInMountainArray(self, arr: List[int]) -> int:
+        l, r = 0, len(arr) - 1
+
+        while l <= r:
+            mid = (l + r) // 2
+
+            # - (mid == 0): This ensures we don't go out of bounds on the left side (first element).
+            # - (arr[mid] > arr[mid - 1]): Checks if the mid element is greater than its left neighbor.
+            # - (mid == len(arr) - 1): This ensures we don't go out of bounds on the right side (last element).
+            # - (arr[mid] > arr[mid + 1]): Checks if the mid element is greater than its right neighbor.
+            if (mid == 0 or arr[mid] > arr[mid - 1]) and (mid == len(arr) - 1 or arr[mid] > arr[mid + 1]):
+                return mid  
+            elif mid > 0 and arr[mid - 1] > arr[mid]:
+                r = mid - 1  
+            else:
+                l = mid + 1  
+        return l 
