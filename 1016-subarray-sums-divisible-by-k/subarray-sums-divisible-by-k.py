@@ -1,11 +1,12 @@
 class Solution:
     def subarraysDivByK(self, nums: List[int], k: int) -> int:
-        prefix_sum = 0
-        reminder= [0]*k
-        reminder[0] = 1
+        mp = defaultdict(int)
+        mp[0] = 1
         ans = 0
-        for i,num in enumerate(nums):
-            prefix_sum = (num + k +prefix_sum)%k
-            ans+= reminder[prefix_sum]
-            reminder[prefix_sum] += 1
+        sum = 0
+        for i in range(len(nums)):
+            sum+=nums[i]
+            mod_val = sum%k 
+            ans += mp[mod_val]
+            mp[mod_val]+=1
         return ans
