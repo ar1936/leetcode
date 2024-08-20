@@ -1,26 +1,33 @@
+from collections import deque
+from typing import List
+
 class Solution:
     def shortestPath(self, grid: List[List[int]], k: int) -> int:
-        n = len(grid)
-        m = len(grid[0])
-        if n == 1 and m==1:
-            return grid[0][0]
-        queue = deque()
-        queue.append((0,0,grid[0][0]))
-        visited = set()
-        visited.add((0,0, grid[0][0]))
-        step = 0
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        n, m = len(grid), len(grid[0])
+        
+        # Initialize the BFS queue and visited set
+        queue = deque([(0, 0, 0, 0)])  # (x, y, steps, used_k)
+        visited = set([(0, 0, 0)])  # (x, y, used_k)
+        
         while queue:
-            for _ in range(len(queue)):
-                prev_x,prev_y, prev_k = queue.popleft()
-                for dx, dy in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
-                    curr_x , curr_y = prev_x + dx, prev_y + dy
-                    if 0<=curr_x<n and 0<=curr_y<m:
-                        total_used_obstacles = prev_k + grid[curr_x][curr_y]
-                        if total_used_obstacles<=k:
-                            if curr_x == n-1 and curr_y == m-1:
-                                return step+1
-                            if (curr_x,curr_y,total_used_obstacles) not in visited:
-                                queue.append((curr_x,curr_y,total_used_obstacles))
-                                visited.add((curr_x,curr_y,total_used_obstacles))
-            step+=1
+            x, y, steps, used_k = queue.popleft()
+            
+            # If we reached the bottom-right corner, return the number of steps
+            if x == n - 1 and y == m - 1:
+                return steps
+            
+            # Explore all four directions
+            for dx, dy in directions:
+                new_x, new_y = x + dx, y + dy
+                
+                if 0 <= new_x < n and 0 <= new_y < m:
+                    new_k = used_k + grid[new_x][new_y]
+                    
+                    # Continue only if the new position is within the allowed obstacle removal limit
+                    if new_k <= k and (new_x, new_y, new_k) not in visited:
+                        visited.add((new_x, new_y, new_k))
+                        queue.append((new_x, new_y, steps + 1, new_k))
+        
+        # If no path is found
         return -1
