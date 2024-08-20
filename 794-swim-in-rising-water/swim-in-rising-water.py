@@ -4,21 +4,20 @@ class Solution:
         dy = [1,-1,0,0]
         n = len(grid)
         m = len(grid[0])
-        heap = [(grid[0][0], 0, 0)]
-        dist = [[10**9]*m for _ in range(n)]
-        visited = set()
-        visited.add((0,0))
-        ans = grid[0][0]
+        time = [[float('inf')]* m for _ in range(n)]
+        heap = []
+        heapq.heappush(heap,(grid[0][0], 0,0))
+        ans = 0
         while heap:
-            d, x,y= heapq.heappop(heap)
-            ans = max(d,ans)
-            if x == n-1 and y == m-1:
-                return ans
+            t, x,y = heapq.heappop(heap)
+            ans  = max(ans, t)
+            if x == n- 1 and y == m -1:
+                return ans 
             for k in range(4):
-                new_x, new_y = x + dx[k] , y+dy[k]
-                if 0<=new_x<n and 0<=new_y<m and (new_x, new_y) not in visited:
-                    new_d = grid[new_x][new_y]
-                    dist[new_x][new_y] = new_d
-                    heapq.heappush(heap,(new_d, new_x,new_y))
-                    visited.add((new_x,new_y))
+                r,c = x+dx[k], y + dy[k]
+                if 0<=r<n and 0<=c<m:
+                    new_t = grid[r][c]
+                    if time[r][c] > new_t:
+                        heapq.heappush(heap,(new_t, r, c))
+                        time[r][c] = new_t
         return ans
