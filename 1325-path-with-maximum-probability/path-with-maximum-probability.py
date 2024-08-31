@@ -21,4 +21,3 @@ class Solution:
                     prob[curr_node] = total_prob
         return 0.0
 
-
